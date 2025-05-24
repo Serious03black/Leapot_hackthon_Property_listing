@@ -12,8 +12,9 @@ import {
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import MicIcon from '@mui/icons-material/Mic';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import ImageIcon from '@mui/icons-material/Image';
 import PreviewIcon from '@mui/icons-material/Preview';
+import WaveBackground from '../components/WaveBackground';
 
 const HomePage = () => {
   const theme = useTheme();
@@ -26,7 +27,7 @@ const HomePage = () => {
       description: "Describe properties naturally using voice commands"
     },
     {
-      icon: <PhotoCameraIcon fontSize="large" color="primary" />,
+      icon: <ImageIcon fontSize="large" color="primary" />,
       title: "Photo Integration",
       description: "Automatically attach property photos from your device"
     },
@@ -38,100 +39,185 @@ const HomePage = () => {
   ];
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      {/* Hero Section */}
-      <Box sx={{ 
-        textAlign: 'center', 
-        py: 8,
-        background: `linear-gradient(135deg, ${theme.palette.primary.light} 0%, ${theme.palette.primary.dark} 100%)`,
-        borderRadius: 2,
-        color: 'white',
-        mb: 6
-      }}>
-        <Typography variant="h2" component="h1" gutterBottom sx={{ fontWeight: 700 }}>
-          Voice-Driven Property Listing
-        </Typography>
-        <Typography variant="h5" component="h2" sx={{ mb: 4 }}>
-          Transform phone conversations into perfect listings instantly
-        </Typography>
-        <Button 
-          component={Link} 
-          to="/create-listing" 
-          variant="contained" 
-          color="secondary" 
-          size="large"
-          startIcon={<MicIcon />}
-          sx={{ 
-            px: 4,
-            py: 1.5,
-            fontSize: '1.1rem',
-            fontWeight: 600
-          }}
-        >
-          Start New Listing
-        </Button>
-      </Box>
-
-      {/* Features Section */}
-      <Typography variant="h4" component="h2" align="center" sx={{ mb: 4, fontWeight: 600 }}>
-        How It Works
-      </Typography>
-      <Grid container spacing={4} sx={{ mb: 8 }}>
-        {features.map((feature, index) => (
-          <Grid item xs={12} sm={4} key={index}>
-            <Card sx={{ 
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              transition: 'transform 0.3s',
+    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Animated Background */}
+      <WaveBackground />
+      
+      <Container maxWidth="lg" sx={{ py: 8, position: 'relative' }}>
+        {/* Hero Section */}
+        <Box sx={{ 
+          textAlign: 'center', 
+          py: 8,
+          mb: 8,
+          borderRadius: 4,
+          position: 'relative',
+          zIndex: 1
+        }}>
+          <Typography 
+            variant={isMobile ? 'h3' : 'h2'} 
+            component="h1" 
+            gutterBottom 
+            sx={{ 
+              fontWeight: 800,
+              color: theme.palette.primary.dark,
+              mb: 2
+            }}
+          >
+            Transform Conversations into Listings
+          </Typography>
+          <Typography 
+            variant={isMobile ? 'h6' : 'h5'} 
+            component="h2" 
+            sx={{ 
+              mb: 4,
+              color: theme.palette.text.secondary,
+              maxWidth: '700px',
+              mx: 'auto'
+            }}
+          >
+            The fastest way to create property listings using just your voice
+          </Typography>
+          <Button 
+            component={Link} 
+            to="/create-listing" 
+            variant="contained" 
+            color="primary" 
+            size="large"
+            startIcon={<MicIcon />}
+            sx={{ 
+              px: 6,
+              py: 1.5,
+              fontSize: '1.1rem',
+              fontWeight: 600,
+              borderRadius: 50,
+              boxShadow: theme.shadows[4],
               '&:hover': {
-                transform: 'translateY(-8px)',
-                boxShadow: theme.shadows[6]
+                boxShadow: theme.shadows[8]
               }
-            }}>
-              <CardContent sx={{ 
-                flexGrow: 1,
-                textAlign: 'center',
-                py: 4
-              }}>
-                <Box sx={{ mb: 2 }}>
-                  {feature.icon}
-                </Box>
-                <Typography variant="h5" component="h3" gutterBottom>
-                  {feature.title}
-                </Typography>
-                <Typography>
-                  {feature.description}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+            }}
+          >
+            Get Started
+          </Button>
+        </Box>
 
-      {/* Call to Action */}
-      <Box sx={{ 
-        textAlign: 'center',
-        p: 4,
-        backgroundColor: theme.palette.grey[100],
-        borderRadius: 2
-      }}>
-        <Typography variant="h5" component="h3" gutterBottom sx={{ fontWeight: 600 }}>
-          Ready to revolutionize your workflow?
-        </Typography>
-        <Button 
-          component={Link} 
-          to="/create-listing" 
-          variant="contained" 
-          color="primary" 
-          size={isMobile ? 'medium' : 'large'}
-          startIcon={<MicIcon />}
-          sx={{ mt: 2 }}
-        >
-          Try It Now
-        </Button>
-      </Box>
-    </Container>
+        {/* Features Section */}
+        <Box sx={{ 
+          backgroundColor: 'background.paper',
+          borderRadius: 4,
+          p: 4,
+          boxShadow: theme.shadows[2],
+          mb: 8
+        }}>
+          <Typography 
+            variant="h4" 
+            component="h2" 
+            align="center" 
+            sx={{ 
+              mb: 6, 
+              fontWeight: 700,
+              color: theme.palette.primary.main
+            }}
+          >
+            How It Works
+          </Typography>
+          <Grid container spacing={4}>
+            {features.map((feature, index) => (
+              <Grid item xs={12} md={4} key={index}>
+                <Card sx={{ 
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  border: 'none',
+                  boxShadow: 'none',
+                  backgroundColor: 'transparent',
+                  transition: 'transform 0.3s',
+                  '&:hover': {
+                    transform: 'translateY(-5px)'
+                  }
+                }}>
+                  <CardContent sx={{ 
+                    flexGrow: 1,
+                    textAlign: 'center',
+                    px: 0,
+                    py: 0
+                  }}>
+                    <Box sx={{ 
+                      mb: 3,
+                      display: 'inline-flex',
+                      p: 2,
+                      backgroundColor: theme.palette.primary.light,
+                      borderRadius: '50%',
+                      color: 'white'
+                    }}>
+                      {feature.icon}
+                    </Box>
+                    <Typography 
+                      variant="h5" 
+                      component="h3" 
+                      gutterBottom 
+                      sx={{ 
+                        fontWeight: 600,
+                        color: theme.palette.text.primary
+                      }}
+                    >
+                      {feature.title}
+                    </Typography>
+                    <Typography 
+                      variant="body1" 
+                      sx={{ 
+                        color: theme.palette.text.secondary,
+                        maxWidth: '300px',
+                        mx: 'auto'
+                      }}
+                    >
+                      {feature.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Call to Action */}
+        <Box sx={{ 
+          textAlign: 'center',
+          p: 6,
+          backgroundColor: theme.palette.primary.main,
+          borderRadius: 4,
+          color: 'white'
+        }}>
+          <Typography 
+            variant={isMobile ? 'h5' : 'h4'} 
+            component="h3" 
+            gutterBottom 
+            sx={{ 
+              fontWeight: 700,
+              mb: 3
+            }}
+          >
+            Ready to revolutionize your workflow?
+          </Typography>
+          <Button 
+            component={Link} 
+            to="/create-listing" 
+            variant="contained" 
+            color="secondary" 
+            size={isMobile ? 'medium' : 'large'}
+            startIcon={<MicIcon />}
+            sx={{ 
+              mt: 2,
+              px: 6,
+              borderRadius: 50,
+              fontWeight: 600,
+              fontSize: isMobile ? '0.9rem' : '1rem'
+            }}
+          >
+            Try It Now - It's Free
+          </Button>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
